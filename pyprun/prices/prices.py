@@ -1,4 +1,4 @@
-from typing import Final
+from typing import Final, Union, Optional
 
 from pyprun.prun_api.fnar.client import FnarApi
 
@@ -49,14 +49,23 @@ class CXPrices:
         """
         return self._translate_dataframe(await self.api.get_prices())
 
-    async def get_by_ticker(self, ticker: str) -> pd.DataFrame:
+    def get_by_ticker(
+        self, ticker: str, price_type: Optional[str] = None
+    ) -> Union[pd.DataFrame, Optional[float]]:
         """
         Get a price matrix for a ticker like "RAT.IC1"
 
-        Returns a single-series dataframe like this:
+        If "price_type" like "ask" is specified, it will return
+            an Optional[float] representing the value of the column "price_type".
+
         ```
-        Material  CX        ask   avg        bid  mm-buy  mm-sell
-        RAT      IC1  98.599998  88.0  88.099998    32.0    166.0
+        >>> p = await CXPrices.create()
+        >>> p.get_by_ticker("RAT.IC1")
+        Type                ask        avg        bid  mm-buy  mm-sell
+        Material CX
+        RAT      IC1  98.599998  98.599998  88.099998    32.0    166.0
+        >>> p.get_by_ticker("RAT.IC1", "ask")
+        98.5999984741211
         ```
         """
         # todo: validate input
@@ -68,4 +77,8 @@ class CXPrices:
         df_pivot = df.pivot_table(
             index=["Material", "CX"], columns="Type", values="Value"
         )
+
+        if price_type:
+            return df_pivot[price_type].iloc[0]
+
         return df_pivot

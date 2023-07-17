@@ -20,3 +20,21 @@ pyspark = "^3.4.1"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.ruff]
+line-length = 100
+
+# see https://github.com/charliermarsh/ruff#supported-rules
+select = [
+    "ARG",
+    "B",
+    "E",
+    "EXE",
+    "F",
+    "I", # isort
+    "PLC", "PLE", "PLW", "PLR", # pylint
+    "PT",
+    "Q",
+    "RET",
+    "S",
+    "TID",
+]
