@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-import pandas as pd
-
-from pyprun.prun_api.fnar.client import FnarApi
-
-
 from typing import Union
 
+import pandas as pd
 from pydantic import BaseModel, Field
+
+from pyprun.prun_api.fnar.client import FnarApi
 
 
 class CxPricesRawRow(BaseModel):
@@ -70,10 +68,9 @@ class CXPrices:
         df_long = df.melt(id_vars="Ticker", var_name="Var", value_name="Value")
         df_long[["Exchange", "PriceType"]] = df_long["Var"].str.split("-", expand=True)
         df_long = df_long.drop("Var", axis=1)
-        df_wide = df_long.pivot(
+        return df_long.pivot(
             index="Ticker", columns=["Exchange", "PriceType"], values="Value"
         )
-        return df_wide
 
     def get_all_prices(self):
         pass

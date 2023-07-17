@@ -7,6 +7,10 @@ The goal is to provide a library that makes it very easy to work with data
 without thinking about calling the api or parsing csv files -- this will
 do that for you.
 
+**This project is extremely alpha.** At this point, only copy-paste code
+from this repo. Soon, we can add tests and make proper pypi releases.
+
+
 ### Example usage
 
 Getting prices

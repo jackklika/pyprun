@@ -1,8 +1,8 @@
-from typing import Final, Union, Optional
-
-from pyprun.prun_api.fnar.client import FnarApi
+from typing import Final, Optional, Union
 
 import pandas as pd
+
+from pyprun.prun_api.fnar.client import FnarApi
 
 
 class CXPrices:
