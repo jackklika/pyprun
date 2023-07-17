@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pyprun"
+version = "0.1.0"
+description = ""
+authors = ["jack"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+httpx = "^0.24.1"
+pandas = "^2.0.3"
+pydantic = "^1.10"
+black = "^23.7.0"
+ruff = "^0.0.278"
+pandera = "^0.16.0"
+pyspark = "^3.4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
